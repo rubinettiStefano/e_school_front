@@ -14,4 +14,10 @@ export class StudentService
   {
     return this.http.get<Student[]>("/api/students");
   }
+
+  insert(student:Student):Observable<Student>
+  {
+    return this.http.post<Student>("/api/students",student);
+  }
+
 }
