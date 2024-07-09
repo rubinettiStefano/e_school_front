@@ -9,11 +9,12 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
+import { StudentDetailComponent } from "./student-detail/student-detail.component";
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,MatFormFieldModule,MatExpansionModule,MatIconModule,CommonModule,FormsModule,MatInputModule,MatButtonModule],
+  imports: [RouterOutlet, MatFormFieldModule, MatExpansionModule, MatIconModule, CommonModule, FormsModule, MatInputModule, MatButtonModule, StudentDetailComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

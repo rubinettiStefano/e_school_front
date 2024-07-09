@@ -1,0 +1,17 @@
+<div class="p-4">
+    <figure class="md:flex max-w-5xl bg-slate-100 rounded-xl p-8 md:p-0 dark:bg-slate-800">
+      <div class="pt-6 md:p-8 text-center md:text-left space-y-4">
+        <figcaption class="font-medium">
+          <div class="text-slate-700 dark:text-sky-400">
+            {{grade.subject}}
+          </div>
+          <div class="text-slate-700 dark:text-sky-400">
+            {{grade.value}}/10
+          </div>
+          <div class="text-slate-700 dark:text-slate-400">
+            {{grade.day | date:"dd/MM/yyyy"}} - {{grade.teacherName}} {{grade.teacherSurname}}
+          </div>
+        </figcaption>
+      </div>
+    </figure>
+  </div>
