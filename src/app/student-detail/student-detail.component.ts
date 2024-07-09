@@ -4,6 +4,8 @@ import { Student } from '../model/Student';
 import { Grade } from '../model/Grade';
 import { GradeCardComponent } from "../grade-card/grade-card.component";
 import { GradeFormComponent } from "../grade-form/grade-form.component";
+import { Location } from '@angular/common';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-student-detail',
@@ -14,9 +16,10 @@ import { GradeFormComponent } from "../grade-form/grade-form.component";
 })
 export class StudentDetailComponent 
 {
-  constructor(private service:StudentService)
+  constructor(private service:StudentService,private route:ActivatedRoute)
   {
-    service.getOne(1)
+    let studentId:number= parseInt(route.snapshot.paramMap.get("id")!);
+    service.getOne(studentId)
     .subscribe(
       data => 
       {
