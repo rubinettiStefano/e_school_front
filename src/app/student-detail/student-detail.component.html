@@ -14,7 +14,7 @@
         </section>
     </div>
 
-    <app-grade-form (newGradeEvent)="saveGrade($event)"></app-grade-form>
+    <app-grade-form [studentid]="student.id!" (newGradeEvent)="saveGrade($event)"></app-grade-form>
 
 </div>
 

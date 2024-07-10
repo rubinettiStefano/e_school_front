@@ -8,15 +8,18 @@
 <div class="flex items-center justify-center p-12">
     <!-- Author: FormBold Team -->
     <div class="mx-auto w-full max-w-[550px] bg-white">
-        <form #form="ngForm" (ngSubmit)="sendNewGradeEvent();form.form.reset()">
+        <form  [formGroup]="gradeForm" (ngSubmit)="salva()">
             <div class="-mx-3 flex flex-wrap">
                 <div class="w-full px-3 sm:w-1/2">
                     <div class="mb-5">
                         <label for="fName" class="mb-3 block text-base font-medium text-[#07074D]">
                             Teacher First Name 
                         </label>
-                        <input type="text" name="fName" id="fName" placeholder="First Name" [(ngModel)]="newGrade.teacherName"
+                        <input type="text" name="fName" id="fName" placeholder="First Name" formControlName="teacherName" 
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                            <div *ngIf="gradeForm.get('teacherName')?.getError('teacherNotFound') && gradeForm.get('teacherName')?.touched" class="mt-2 text-sm text-red-600">
+                                {{teacherError}}
+                            </div> 
                     </div>
                 </div>
                 <div class="w-full px-3 sm:w-1/2">
@@ -24,16 +27,17 @@
                         <label for="lName" class="mb-3 block text-base font-medium text-[#07074D]">
                             Teacher Last Name
                         </label>
-                        <input type="text" name="lName" id="lName" placeholder="Last Name" [(ngModel)]="newGrade.teacherSurname"
+                        <input type="text" name="lName" id="lName" placeholder="Last Name" formControlName="teacherSurname"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                 </div>
+               
             </div>
             <div class="mb-5">
                 <label for="guest" class="mb-3 block text-base font-medium text-[#07074D]">
                     Value
                 </label>
-                <input type="number" name="guest" id="guest" placeholder="6" min="1" max="10" [(ngModel)]="newGrade.value"
+                <input type="number" name="guest" id="guest" placeholder="6" min="1" max="10" formControlName="value"
                     class="w-full appearance-none rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
             </div>
 
@@ -43,16 +47,24 @@
                         <label for="date" class="mb-3 block text-base font-medium text-[#07074D]">
                             Date
                         </label>
-                        <input type="date" name="date" id="date" [(ngModel)]="newGrade.day"
+                        <input type="date" name="date" id="date" formControlName="day"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
+                        @if(gradeForm.get('day')?.getError('dateNotValid') && gradeForm.get('day')?.touched) 
+                        {
+                            
+                            <div class="mt-2 text-sm text-red-600">
+                                Invalid Date
+                            </div>
+                        }   
                     </div>
+
                 </div>
                 <div class="w-full px-3 sm:w-1/2">
                     <div class="mb-5">
                         <label for="Subject" class="mb-3 block text-base font-medium text-[#07074D]">
                             Subject
                         </label>
-                        <input type="text" name="Subject" id="Subject" placeholder="Subject" [(ngModel)]="newGrade.subject"
+                        <input type="text" name="Subject" id="Subject" placeholder="Subject" formControlName="subject"
                             class="w-full rounded-md border border-[#e0e0e0] bg-white py-3 px-6 text-base font-medium text-[#6B7280] outline-none focus:border-[#6A64F1] focus:shadow-md" />
                     </div>
                 </div>
@@ -61,7 +73,9 @@
            
             <div>
                 <button
-                    class="hover:shadow-form rounded-md bg-[#6A64F1] py-3 px-8 text-center text-base font-semibold text-white outline-none">
+                    [disabled]="gradeForm.invalid"
+                    [ngClass]="{ 'bg-gray-400 text-[#EEEE]': gradeForm.invalid, 'bg-[#6A64F1] text-white': gradeForm.valid }"
+                    class="hover:shadow-form  rounded-md py-3 px-8 text-center text-base font-semibold  outline-none ">
                     Submit
                 </button>
             </div>

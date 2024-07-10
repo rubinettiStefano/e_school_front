@@ -33,25 +33,10 @@ export class StudentDetailComponent
 
   saveGrade(grade:Grade)
   {
-    this.service.addGrade(grade,this.student.id!)
-    .subscribe(
-      {
-          next: dto=> //viene attivato nel caso positivo
-          {
-            this.grades.push(dto)
-          },
-          error: badResponse=> //viene attivato nel caso negativo
-          {
-            console.log(badResponse);
-            if(badResponse.status==404)
-              alert("Could not complete request, "+badResponse.error.message);
-            else
-              alert("PROBLEMI NEL SERVER, RIPROVA PIÙ TARDI")
-          }
-      }
-    );
+    this.grades.push(grade);
   }
 
   student!:Student;
   grades!:Grade[];
+ 
 }
